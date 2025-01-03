@@ -1,0 +1,78 @@
+    :root {
+        --temp: 0;
+        --humi: 0;
+        --mois: 0;
+        --ligh: 0;
+    }
+    
+    body {
+        background-color: #000;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif
+    }
+    .dashboard{
+        display: flex;
+        gap: 100px;
+    }
+    .gauge {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    .gauge .circle {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        background: #333;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .gauge .circle .value {
+        position: absolute;
+        z-index: 2;
+        font-size: 24px;
+        text-align: center;
+        line-height: 1.2;
+    }
+
+    .gauge .circle::before {
+        content: "";
+        position: absolute;
+        width: 110px;
+        height: 110px;
+        background-color: #000;
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+    .gauge .circle[data-type="temperature"] {
+        background: conic-gradient(#82e572 calc(var(--temp) / 40 * 100%), #333 calc(var(--temp) / 40 * 100%));;
+    }
+    .gauge .circle[data-type="humidity"] {
+        background: conic-gradient(#82e572 calc(var(--humi) * 100% / 100), #333 calc(var(--humi) * 100% / 100));
+    }
+    .gauge .circle[data-type="moisture"] {
+        background: conic-gradient(#82e572 calc(var(--mois) * 100% / 2000), #333 calc(var(--mois) * 100% / 2000));
+    }
+    .gauge .circle[data-type="light"] {
+        background: conic-gradient(#82e572 calc(var(--ligh) * 100% / 3000), #333 calc(var(--ligh) * 100% / 3000));
+    }
+
+    .range-labels {
+        display: flex;
+        justify-content: space-between;
+        width: 130px;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
