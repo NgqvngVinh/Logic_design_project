@@ -21,86 +21,8 @@
 
 #define WLAN_SSID "Redmi"
 #define WLAN_PASS "123456789"
-// #define AIO_SERVER      "io.adafruit.com"
-// #define AIO_SERVERPORT  1883
-// #define AIO_USERNAME    "justacow224" // NPNLab_BBC
-// #define AIO_KEY         "aio_wvKk22tg1OSLbvcnID5TCWHCQr4j"
-
-// #define OHS_SERVER      "mqtt.ohstem.vn"
-// #define OHS_SERVERPORT  1883
-// #define OHS_USERNAME    "abcd0386433465"
-// #define OHS_KEY         "12345678"
-
-
-// #define BKTK_SERVER      "mqttserver.tk"
-// #define BKTK_SERVERPORT  1883
-// #define BKTK_USERNAME    "innovation"
-// #define BKTK_KEY         "Innovation_RgPQAZoA5N"
-
-
 
 WiFiClient client;
-// Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO_USERNAME, AIO_KEY);
-//Adafruit_MQTT_Client mqtt(&client, OHS_SERVER, OHS_SERVERPORT, OHS_USERNAME, OHS_USERNAME, OHS_KEY);
-//Adafruit_MQTT_Client mqtt(&client, BKTK_SERVER, BKTK_SERVERPORT, BKTK_USERNAME, BKTK_USERNAME, BKTK_KEY);
-
-/****************************** Feeds ***************************************/
-
-// Setup a feed called 'time' for subscribing to current time
-// Adafruit_MQTT_Subscribe timefeed = Adafruit_MQTT_Subscribe(&mqtt, "time/seconds");
-
-// // Setup a feed called 'slider' for subscribing to changes on the slider
-// Adafruit_MQTT_Subscribe slider = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME "/feeds/slider", MQTT_QOS_1);
-
-// // Setup a feed called 'onoff' for subscribing to changes to the button
-// Adafruit_MQTT_Subscribe onoffbutton = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME "/feeds/onoff", MQTT_QOS_1);
-// //Adafruit_MQTT_Subscribe onoffbutton = Adafruit_MQTT_Subscribe(&mqtt, OHS_USERNAME "/feeds/V1", MQTT_QOS_1);
-
-// Setup a feed called 'taskblink_sub' for subscribing to changes on the blink
-// Adafruit_MQTT_Subscribe taskblink_sub = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME "/feeds/taskblink", MQTT_QOS_1);
-
-// Setup a feed called 'tasktemperature_sub' for subscribing to changes on the temperature
-// Adafruit_MQTT_Subscribe  tasktemperature_sub = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME "/feeds/tasktemperature", MQTT_QOS_1);
-
-// Setup a feed called 'taskhumiditye_sub' for subscribing to changes on the humidity
-// Adafruit_MQTT_Subscribe  taskhumidity_sub = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME "/feeds/taskhumidity", MQTT_QOS_1);
-
-// Setup a feed called 'tasksoilmoisture_sub' for subscribing to changes on the moisture rate
-// Adafruit_MQTT_Subscribe tasksoilmoisture_sub = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME "/feeds/tasksoilmoisture", MQTT_QOS_1);
-
-// Setup a feed called 'tasksoilrelay_sub' for subscribing to changes on the soil relay
-// Adafruit_MQTT_Subscribe tasksoilrelay_sub = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME "/feeds/tasksoilrelay", MQTT_QOS_1);
-
-// Setup a feed called 'tasklight_sub' for subscribing to changes on the light
-// Adafruit_MQTT_Subscribe tasklight_sub = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME "/feeds/tasklight", MQTT_QOS_1);
-
-// Setup a feed called 'tasklightled_sub' for subscribing to changes on the light
-// Adafruit_MQTT_Subscribe tasklightled_sub = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME "/feeds/tasklightled", MQTT_QOS_1);
-
-// // Setup a feed called 'photocell' for publishing.
-// Adafruit_MQTT_Publish sensory = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/sensory");
-// //Adafruit_MQTT_Publish sensory = Adafruit_MQTT_Publish(&mqtt, OHS_USERNAME "/feeds/V20");
-
-// Setup a feed called 'taskblink_pub' for publishing.
-// Adafruit_MQTT_Publish taskblink_pub = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/taskblink");
-
-// Setup a feed called 'tasktemperature_pub' for publishing.
-// Adafruit_MQTT_Publish tasktemperature_pub = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/tasktemperature");
-
-// Setup a feed called 'taskhumidity_pub' for publishing.
-// Adafruit_MQTT_Publish taskhumidity_pub = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/taskhumidity");
-
-// Setup a feed called 'tasksoilmoisture' for publishing.
-// Adafruit_MQTT_Publish tasksoilmoisture_pub = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/tasksoilmoisture");
-
-// Setup a feed called 'tasksoilrelay_pub' for publishing.
-// Adafruit_MQTT_Publish tasksoilrelay_pub = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/tasksoilrelay");
-
-// Setup a feed called 'tasklight_pub' for publishing.
-// Adafruit_MQTT_Publish tasklight_pub = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/tasklight");
-
-// Setup a feed called 'tasklightled_pub' for publishing.
-// Adafruit_MQTT_Publish tasklightled_pub = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/tasklightled");
 
 // Define your tasks here
 void TaskBlink(void *pvParameters);
@@ -108,43 +30,24 @@ void TaskTemperatureHumidity(void *pvParameters);
 void TaskSoilMoistureAndRelay(void *pvParameters);
 void TaskLightAndLED(void *pvParameters);
 void TaskDistanceMeasure(void *pvParameters);
+
 //Define your components here
 Adafruit_NeoPixel pixels3(4, D5, NEO_GRB + NEO_KHZ800);
 DHT20 dht20;
 LiquidCrystal_I2C lcd(33,16,2);
 UltraSonicDistanceSensor distance(10, 17);
-// WebServer server(80);
 AsyncWebServer server(80);
 int CLK0P = 18;
 int DIO = 21;
-
-// Tạo đối tượng hiển thị TM1637
 TM1637Display display = TM1637Display(CLK0P, DIO);
 
 
 void MQTT_connect() {
   int8_t ret;
 
-  // Stop if already connected.
-  // if (mqtt.connected()) {
-  //   return;
-  // }
-
   Serial.print("Connecting to MQTT... ");
 
   uint8_t retries = 3;
-  // while ((ret = mqtt.connect()) != 0) { // connect will return 0 for connected
-  //   Serial.println(mqtt.connectErrorString(ret));
-  //   Serial.println("Retrying MQTT connection in 10 seconds...");
-  //   mqtt.disconnect();
-  //   delay(10000);  // wait 10 seconds
-  //   retries--;
-  //   if (retries == 0) {
-  //     // basically die and wait for WDT to reset me
-  //     while (1);
-  //   }
-  // }
-  // Serial.println("MQTT Connected!");
 }
 
 // Create a structure to hold all sensor data
@@ -462,25 +365,16 @@ void setup() {
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 
-  // mqtt.subscribe(&slider);
-  // mqtt.subscribe(&onoffbutton);
-  // mqtt.subscribe(&taskblink_sub);
-  // mqtt.subscribe(&tasktemperature_sub);
-  // mqtt.subscribe(&taskhumidity_sub);
-  // mqtt.subscribe(&tasksoilmoisture_sub);
-  // mqtt.subscribe(&tasksoilrelay_sub);
-  // mqtt.subscribe(&tasklight_sub);
-  // mqtt.subscribe(&tasklightled_sub);
   ledcSetup(0, 5000, 8);  // Channel 0, 5000 Hz, 8-bit resolution
   ledcAttachPin(D9, 0);  // Attach pin to channel 0
   ledcWrite(0, 0);
 
   setupWebServer(); 
 
-  // xTaskCreate( TaskBlink, "Task Blink" ,2048  ,NULL  ,2 , NULL);
+  xTaskCreate( TaskBlink, "Task Blink" ,2048  ,NULL  ,2 , NULL);
   xTaskCreate( TaskTemperatureHumidity, "Task Temperature" ,2048  ,NULL  ,2 , NULL);
-  // xTaskCreate( TaskSoilMoistureAndRelay, "Task Soild Relay" ,2048  ,NULL  ,2 , NULL);
-  // xTaskCreate( TaskLightAndLED, "Task Light LED" ,2048  ,NULL  ,2 , NULL);
+  xTaskCreate( TaskSoilMoistureAndRelay, "Task Soild Relay" ,2048  ,NULL  ,2 , NULL);
+  xTaskCreate( TaskLightAndLED, "Task Light LED" ,2048  ,NULL  ,2 , NULL);
   xTaskCreate( TaskDistanceMeasure, "Task Distance Measure" ,2048  ,NULL  ,2 , NULL);
   
   //Now the task scheduler is automatically started.
@@ -491,11 +385,7 @@ void setup() {
 }
 int pubCount = 0;
 void loop() {
-  // MQTT_connect();
-  // mqtt.processPackets(10000);
-  // if(! mqtt.ping()) {
-  //   mqtt.disconnect();
-  // }
+
 }
 
 
@@ -505,11 +395,7 @@ void loop() {
 /*--------------------------------------------------*/
 
 
-// uint32_t x=0;
-void TaskBlink(void *pvParameters) {  // This is a task.
-  //uint32_t blink_delay = *((uint32_t *)pvParameters);
-
-  // initialize digital LED_BUILTIN on pin 13 as an output.
+void TaskBlink(void *pvParameters) {  
   pinMode(LED_BUILTIN, OUTPUT);
   
 
@@ -517,36 +403,25 @@ void TaskBlink(void *pvParameters) {  // This is a task.
     digitalWrite(LED_BUILTIN, HIGH);  // turn the LED ON
     Serial.println("LED ON");
     delay(1000);
-
-    // taskblink_pub.publish(blinkState);
     digitalWrite(LED_BUILTIN, LOW);  // turn the LED OFF
     Serial.println("LED OFF");
     delay(1000);
-
-    // taskblink_pub.publish(blinkState);
-    // if (sensory.publish(x++)) {
-    //   Serial.println(F("Published successfully!!"));
-    // }
   }
 }
 
 
 void TaskTemperatureHumidity(void *pvParameters) {  // This is a task.
-  //uint32_t blink_delay = *((uint32_t *)pvParameters);
-
   while(1) {                          
     Serial.println("Task Temperature and Humidity");
     dht20.read();
     Serial.println(dht20.getTemperature());
-    // tasktemperature_pub.publish(dht20.getTemperature());
     Serial.println(dht20.getHumidity());
-    // taskhumidity_pub.publish(dht20.getHumidity());
     
-    // lcd.clear();
-    // lcd.setCursor(0, 0);
-    // lcd.print(dht20.getTemperature());
-    // lcd.setCursor(0, 1);
-    // lcd.print(dht20.getHumidity());
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print(dht20.getTemperature());
+    lcd.setCursor(0, 1);
+    lcd.print(dht20.getHumidity());
 
     delay(5000);
   }
@@ -571,24 +446,18 @@ void TaskDistanceMeasure(void *pvParameters) {
 }
 
 void TaskSoilMoistureAndRelay(void *pvParameters) {  // This is a task.
-  //uint32_t blink_delay = *((uint32_t *)pvParameters);
-
   pinMode(D3, OUTPUT);
 
   while(1) {                          
     Serial.println("Task Soild and Relay");
     Serial.println(analogRead(A0));
-    // tasksoilmoisture_pub.publish(uint32_t(analogRead(A0)));
+
     
     if(analogRead(A0) > 500){
       digitalWrite(D3, LOW);
-      uint32_t relayState = 0;
-      // tasksoilrelay_pub.publish(relayState);
     }
     if(analogRead(A0) < 50){
       digitalWrite(D3, HIGH);
-      uint32_t relayState = 1;
-      // tasksoilrelay_pub.publish(relayState);
     }
     delay(5000);
   }
@@ -596,20 +465,19 @@ void TaskSoilMoistureAndRelay(void *pvParameters) {  // This is a task.
 
 
 void TaskLightAndLED(void *pvParameters) {  // This is a task.
-  //uint32_t blink_delay = *((uint32_t *)pvParameters);
+
 
   while(1) {                          
     Serial.println("Task Light and LED");
     Serial.println(analogRead(A1));
-    // tasklight_pub.publish(uint32_t(analogRead(A1)));
+
     if(analogRead(A1) < 350){
       pixels3.setPixelColor(0, pixels3.Color(255,0,0));
       pixels3.setPixelColor(1, pixels3.Color(255,0,0));
       pixels3.setPixelColor(2, pixels3.Color(255,0,0));
       pixels3.setPixelColor(3, pixels3.Color(255,0,0));
       pixels3.show();
-      uint32_t lightLedState = 1;
-      // tasklightled_pub.publish(lightLedState);
+
     }
     if(analogRead(A1) > 550){
       pixels3.setPixelColor(0, pixels3.Color(0,0,0));
@@ -617,8 +485,7 @@ void TaskLightAndLED(void *pvParameters) {  // This is a task.
       pixels3.setPixelColor(2, pixels3.Color(0,0,0));
       pixels3.setPixelColor(3, pixels3.Color(0,0,0));
       pixels3.show();
-      uint32_t lightLedState = 0;
-      // tasklightled_pub.publish(lightLedState);
+
     }
     delay(5000);
   }
