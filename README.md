@@ -8,7 +8,7 @@
    - MQTT  
    - Mini Server  
 
-2. **VS Code and PlatformIO**
+2. **PlatformIO on VSCode**
    - RTOS on Arduino  
    - MQTT  
    - Mini Server  
